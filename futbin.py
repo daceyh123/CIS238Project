@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen as uOpen
 from urllib.request import Request
 
-filename = "players.csv"
+filename = "playersFutbin.csv"
 f = open(filename, "w")
 
 headers = "player, rating, price\n"
@@ -30,11 +30,16 @@ while i < 3:
 
 		player_name = container.find("a", {"class": "player_name_players_table"}).text
 
-		if container.find("span", {"class": "form rating ut19 icon gold rare"}) is None or container.find("span", {"class": "form rating ut19 icon gold rare"}) == 0:
-
-			rating = "None"
-		else:
+		if container.find("span", {"class": "form rating ut19 icon gold rare"}) is not None:
 			rating = container.find("span", {"class": "form rating ut19 icon gold rare"}).text
+		elif container.find("span", {"class": "form rating ut19 gold rare"}) is not None:
+			rating = container.find("span", {"class": "form rating ut19 gold rare"}).text
+		elif container.find("span", {"class": "form rating ut19 ucl_rare gold rare"}) is not None:
+			rating = container.find("span", {"class": "form rating ut19 ucl_rare gold rare"}).text
+		elif container.find("span", {"class": "form rating ut19 if gold rare"}) is not None:
+			rating = container.find("span", {"class": "form rating ut19 if gold rare"}).text
+		else:
+			rating = "None"
 
 		price = container.find("span", {"class": "ps4_color font-weight-bold"}).text.strip()
 
