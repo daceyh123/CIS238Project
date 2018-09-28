@@ -11,7 +11,7 @@ headers = "player, rating, price\n"
 f.write(headers)
 
 i = 0
-while i < 300:
+while i < 31:
 
 	my_url = 'https://www.futwiz.com/en/fifa18/players?page=' + str(i)
 
@@ -22,7 +22,7 @@ while i < 300:
 
 	page_soup = soup(page_html, "html.parser")
 
-	containers = page_soup.findAll("span", {"class": "ps4_color font-weight-bold"})
+	containers = page_soup.findAll("tr", {"class": "table-row"})
 
 
 	for container in containers:
